@@ -1,0 +1,42 @@
+{% extends 'registration/base.html' %}
+{% load widget_tweaks %}
+{% block pannel %}
+
+
+    <form id="sign_in" method="POST">
+                    {% csrf_token %}
+                    <div class="msg">Sign in to start your session</div>
+                        {% for field in form %}
+                            {{ field.label_tag }}
+                    <div class="input-group">
+{#                        <span class="input-group-addon">#}
+{#                            <i class="material-icons">person</i>#}
+{#                        </span>#}
+                        <div class="form-line">
+                            {{ field | add_class:'form-control'}}
+                        </div>
+                            {% for error in field.errors %}
+                                <p style="color: red">{{ error | safe }}</p>
+                            {% endfor %}
+                    </div>
+                        {% endfor %}
+
+                    <div class="row">
+                        <div class="col-xs-8 p-t-5">
+                            <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
+                            <label for="rememberme">Remember Me</label>
+                        </div>
+                        <div class="col-xs-4">
+                            <button class="btn btn-block bg-pink waves-effect" type="submit">SIGN IN</button>
+                        </div>
+                    </div>
+                    <div class="row m-t-15 m-b--20">
+                        <div class="col-xs-6">
+                            <a href="{% url 'stock_app:signup' %}">Register Now!</a>
+                        </div>
+                        <div class="col-xs-6 align-right">
+                            <a href="">Forgot Password?</a>
+                        </div>
+                    </div>
+                </form>
+{% endblock pannel %}
